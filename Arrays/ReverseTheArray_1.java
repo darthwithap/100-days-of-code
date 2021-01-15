@@ -23,5 +23,6 @@ public class ReverseTheArray_1 {
         for (i = 0; i < n; i++) {
             System.out.print(a[i] + " ");
         }
+        sc.close();
     }
 }

@@ -13,5 +13,6 @@ public class KthMaxMinArray_3 {
             a[i] = sc.nextInt();
         Arrays.sort(a);
         System.out.print("kth min: " + a[k - 1] + " kth min: " + a[n - k]);
+        sc.close();
     }
 }

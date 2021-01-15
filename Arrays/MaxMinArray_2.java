@@ -13,6 +13,7 @@ public class MaxMinArray_2 {
         }
         int[] res = MaxMin(a, 0, n - 1);
         System.out.print("min: " + res[0] + " max: " + res[1]);
+        sc.close();
     }
 
     static int[] MaxMin(int[] a, int i, int j) {

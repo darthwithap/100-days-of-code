@@ -20,5 +20,6 @@ public class Sort012_4 {
         for (i=z+o; i<n; i++) a[i] = 2;
 
         System.out.println(Arrays.toString(a));
+        sc.close();
     }
 }
