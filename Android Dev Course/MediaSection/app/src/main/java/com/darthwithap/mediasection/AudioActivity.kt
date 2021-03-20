@@ -16,6 +16,7 @@ class AudioActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val basicPhrasesButton = findViewById<Button>(R.id.basic_phrases_button)
+	//extra space limne
 
         setContentView(R.layout.activity_audio)
         val audioManager = getSystemService(AUDIO_SERVICE) as AudioManager
