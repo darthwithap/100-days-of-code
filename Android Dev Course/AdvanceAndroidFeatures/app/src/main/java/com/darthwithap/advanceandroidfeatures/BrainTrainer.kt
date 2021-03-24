@@ -1,5 +1,6 @@
 package com.darthwithap.advanceandroidfeatures
 
+import android.content.Intent
 import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -36,6 +37,7 @@ class BrainTrainer : AppCompatActivity() {
 
         gridLayout = findViewById(R.id.grid_layout)
         val goButton = findViewById<TextView>(R.id.text_go)
+        val imgDownloadingButton = findViewById<Button>(R.id.btn_img_downloading_app)
         val brainTrainerTextView = findViewById<TextView>(R.id.text_brain_trainer)
         val gameLinearLayout = findViewById<LinearLayout>(R.id.game_linear_layout)
         playAgainButton = findViewById(R.id.btn_play_again)
@@ -43,6 +45,15 @@ class BrainTrainer : AppCompatActivity() {
         score = findViewById(R.id.text_score)
         question = findViewById(R.id.text_question)
         verdict = findViewById(R.id.text_verdict)
+        val weatherButton = findViewById<Button>(R.id.btn_weather_app)
+
+        weatherButton.setOnClickListener {
+            startActivity(Intent(this, Weather::class.java))
+        }
+
+        imgDownloadingButton.setOnClickListener {
+            startActivity(Intent(this, DownloadingFromWeb::class.java))
+        }
 
         goButton.setOnClickListener {
             goButton.visibility = View.INVISIBLE

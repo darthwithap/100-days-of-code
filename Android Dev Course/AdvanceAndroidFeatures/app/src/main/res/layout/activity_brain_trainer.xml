@@ -6,6 +6,26 @@
     android:layout_height="match_parent"
     tools:context=".BrainTrainer">
 
+    <Button
+        android:id="@+id/btn_img_downloading_app"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Image Downloading App"
+        app:layout_constraintBottom_toTopOf="@+id/game_linear_layout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/btn_weather_app"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:text="Weather App"
+        app:layout_constraintBottom_toTopOf="@+id/btn_img_downloading_app"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <TextView
         android:id="@+id/text_brain_trainer"
         android:layout_width="wrap_content"
@@ -37,7 +57,6 @@
         android:id="@+id/game_linear_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="64dp"
         android:gravity="center"
         android:orientation="vertical"
         android:padding="16dp"
@@ -45,7 +64,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toBottomOf="@+id/btn_img_downloading_app">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -56,8 +75,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="#FF0000"
-                android:text="00s"
                 android:padding="8dp"
+                android:text="00s"
                 android:textAppearance="@style/TextAppearance.AppCompat.Display2" />
 
             <TextView
@@ -67,8 +86,8 @@
                 android:layout_weight="1"
                 android:background="#E1DEDE"
                 android:gravity="center_horizontal"
-                android:text="0 + 0"
                 android:padding="8dp"
+                android:text="0 + 0"
                 android:textAlignment="center"
                 android:textAppearance="@style/TextAppearance.AppCompat.Display1" />
 
@@ -77,8 +96,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="#448AFF"
-                android:text="0/0"
                 android:padding="8dp"
+                android:text="0/0"
                 android:textAppearance="@style/TextAppearance.AppCompat.Display2" />
 
         </LinearLayout>
@@ -87,60 +106,60 @@
             android:id="@+id/grid_layout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
             android:columnCount="2"
-            android:rowCount="2"
-            android:layout_marginTop="24dp">
+            android:rowCount="2">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="#FF4081"
-                android:padding="16dp"
-                android:text="10"
                 android:onClick="answer"
-                android:textAppearance="@style/TextAppearance.AppCompat.Display4"
-                android:tag="0"/>
+                android:padding="16dp"
+                android:tag="0"
+                android:text="10"
+                android:textAppearance="@style/TextAppearance.AppCompat.Display4" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="#B2FF59"
-                android:padding="16dp"
-                android:text="10"
                 android:onClick="answer"
-                android:textAppearance="@style/TextAppearance.AppCompat.Display4"
-                android:tag="1"/>
+                android:padding="16dp"
+                android:tag="1"
+                android:text="10"
+                android:textAppearance="@style/TextAppearance.AppCompat.Display4" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="#18FFFF"
-                android:padding="16dp"
-                android:text="10"
                 android:onClick="answer"
-                android:textAppearance="@style/TextAppearance.AppCompat.Display4"
-                android:tag="2"/>
+                android:padding="16dp"
+                android:tag="2"
+                android:text="10"
+                android:textAppearance="@style/TextAppearance.AppCompat.Display4" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="#FFFF00"
-                android:padding="16dp"
-                android:text="10"
                 android:onClick="answer"
-                android:textAppearance="@style/TextAppearance.AppCompat.Display4"
-                android:tag="3"/>
+                android:padding="16dp"
+                android:tag="3"
+                android:text="10"
+                android:textAppearance="@style/TextAppearance.AppCompat.Display4" />
 
         </GridLayout>
 
         <TextView
             android:id="@+id/text_verdict"
-            android:textStyle="bold"
-            android:textAppearance="@style/TextAppearance.AppCompat.Display1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="32dp"
-            android:text="Verdict"/>
+            android:text="Verdict"
+            android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+            android:textStyle="bold" />
 
     </LinearLayout>
 
