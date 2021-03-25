@@ -65,6 +65,7 @@ class UsersLocation : AppCompatActivity(), OnMapReadyCallback {
 
         val mapFragment = supportFragmentManager.findFragmentById(R.id.map_user) as SupportMapFragment
         mapFragment.getMapAsync(this@UsersLocation)
+
         locationCallback = object : LocationCallback() {
             override fun onLocationResult(locationResult: LocationResult?) {
                 locationResult ?: return

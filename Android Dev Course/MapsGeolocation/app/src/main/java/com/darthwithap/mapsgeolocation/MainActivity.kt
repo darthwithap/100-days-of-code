@@ -19,5 +19,9 @@ class MainActivity : AppCompatActivity() {
         findViewById<Button>(R.id.btn_user_location_screen).setOnClickListener {
             startActivity(Intent(this, UsersLocation::class.java))
         }
+
+        findViewById<Button>(R.id.btn_hikers_app).setOnClickListener {
+            startActivity(Intent(this, HikersWatch::class.java))
+        }
     }
 }
