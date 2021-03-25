@@ -15,5 +15,9 @@ class MainActivity : AppCompatActivity() {
         everest.setOnClickListener {
             startActivity(Intent(this, MapsActivity::class.java))
         }
+
+        findViewById<Button>(R.id.btn_user_location_screen).setOnClickListener {
+            startActivity(Intent(this, UsersLocation::class.java))
+        }
     }
 }
