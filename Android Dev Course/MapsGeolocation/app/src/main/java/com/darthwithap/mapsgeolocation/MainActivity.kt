@@ -23,5 +23,9 @@ class MainActivity : AppCompatActivity() {
         findViewById<Button>(R.id.btn_hikers_app).setOnClickListener {
             startActivity(Intent(this, HikersWatch::class.java))
         }
+
+        findViewById<Button>(R.id.btn_memorable_places_app).setOnClickListener {
+            startActivity(Intent(this, MemorablePlaces::class.java))
+        }
     }
 }

@@ -17,6 +17,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.MapsGeolocation">
+        <activity android:name=".MemorablePlacesMap"></activity>
+        <activity android:name=".MemorablePlaces" />
         <activity android:name=".HikersWatch" />
         <activity android:name=".UsersLocation" />
         <activity android:name=".MainActivity">
