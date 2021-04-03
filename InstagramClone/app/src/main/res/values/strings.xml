@@ -1,0 +1,6 @@
+<resources>
+    <string name="app_name">InstagramClone</string>
+    <string name="aws_server_url">Server Url Here</string>
+    <string name="aws_application_id">Application Id Here</string>
+    <string name="aws_client_key">Client Key Here</string>
+</resources>
