@@ -19,15 +19,14 @@ class MainActivity : AppCompatActivity() {
 
         if (number.isDigitsOnly()) {
             startWhatsApp(number)
-        }
-        else {
-            Toast.makeText(this, "Please check the number", Toast.LENGTH_SHORT). show()
+        } else {
+            Toast.makeText(this, "Please check the number", Toast.LENGTH_SHORT).show()
         }
     }
 
     private fun startWhatsApp(number: String) {
-         val intent = Intent(Intent.ACTION_VIEW)
-         intent.setPackage("com.whatsapp")
+        val intent = Intent(Intent.ACTION_VIEW)
+        intent.setPackage("com.whatsapp")
 
         val data = when {
             number[0] == '+' -> {
@@ -43,8 +42,8 @@ class MainActivity : AppCompatActivity() {
 
         if (packageManager.resolveActivity(intent, 0) != null) {
             startActivity(intent)
-        }
-        else Toast.makeText(this, "Please install WhatsApp on your device.", Toast.LENGTH_SHORT).show()
+        } else Toast.makeText(this, "Please install WhatsApp on your device.", Toast.LENGTH_SHORT)
+            .show()
         finish()
     }
 }
