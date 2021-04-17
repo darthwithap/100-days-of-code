@@ -1,5 +1,6 @@
 package com.darthwithap.dynamicuilistviewscb
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -17,6 +18,10 @@ class TeacherList : AppCompatActivity() {
 
         val teacherAdapter = TeacherAdapter()
         lvTeachers.adapter = teacherAdapter
+
+        btnCoursesActivity.setOnClickListener {
+            startActivity(Intent(this, ListViewPerformance::class.java))
+        }
     }
 
     inner class TeacherAdapter : BaseAdapter() {

@@ -2,24 +2,24 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".TeacherList">
+    tools:context=".ListViewPerformance"
+    android:orientation="vertical">
 
     <ListView
-        android:id="@+id/lvTeachers"
+        android:id="@+id/lvCourses"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1"/>
+        android:layout_weight="1"
+        tools:listitem="@layout/list_item_course"/>
 
     <Button
-        android:id="@+id/btnCoursesActivity"
-        android:layout_marginBottom="16dp"
-        android:padding="4dp"
-        android:text="Courses Activity"
-        android:layout_gravity="center_horizontal"
+        android:id="@+id/btnNext"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:text="Next Activity"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="16dp"/>
 
 </LinearLayout>
