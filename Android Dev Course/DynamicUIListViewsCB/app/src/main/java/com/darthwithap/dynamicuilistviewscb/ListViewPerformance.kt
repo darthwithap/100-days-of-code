@@ -38,13 +38,19 @@ class ListViewPerformance : AppCompatActivity() {
             return 0
         }
 
-        override fun getView(pos: Int, convertView: View?, parent: ViewGroup?): View {
-            val itemView = layoutInflater.inflate(R.layout.list_item_course, parent, false)
-            itemView.tvCourseName.text = courses[pos].name
-            itemView.tvTeacherName.text = courses[pos].teacher
-            itemView.tvLectures.text = courses[pos].lectures.toString()
-
-            return itemView
+        override fun getView(pos: Int, convertView: View?, parent: ViewGroup?): View? {
+            //OPTIMISING LIST VIEW WITH CONVERT VIEWS
+            val retView: View?
+            if (convertView == null) {
+                retView = layoutInflater.inflate(R.layout.list_item_course, parent, false)
+            }
+            else {
+                convertView.tvCourseName.text = courses[pos].name
+                convertView.tvTeacherName.text = courses[pos].teacher
+                convertView.tvLectures.text = courses[pos].lectures.toString()
+                retView = convertView
+            }
+            return retView
         }
 
     }
