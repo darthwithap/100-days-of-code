@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">SyncAsyncTasks</string>
+    <string name="start">Start</string>
+    <string name="random">Random</string>
+    <string name="retrofit_coroutines">Retrofit Coroutines</string>
+    <string name="async_task_to_coroutines">Async Task to Coroutines</string>
+</resources>
