@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">FragmentsSection</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="dynamic_fragment">Dynamic Fragment</string>
+    <string name="fruits">Fruits</string>
+    <string name="vegetables">Vegetables</string>
+    <string name="view_pager_adapter">view pager adapter</string>
 </resources>

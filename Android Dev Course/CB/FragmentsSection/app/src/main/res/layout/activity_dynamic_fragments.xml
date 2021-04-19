@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".DynamicFragments">
+
+    <Button
+        android:id="@+id/btnFruits"
+        android:layout_width="wrap_content"
+        android:text="@string/fruits"
+        android:layout_margin="8dp"
+        android:layout_height="wrap_content"/>
+    <Button
+        android:id="@+id/btnVegetables"
+        android:layout_gravity="right"
+        android:text="@string/vegetables"
+        android:layout_margin="8dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <FrameLayout
+        android:id="@+id/flFragContainer"
+        android:layout_marginTop="66dp"
+        android:layout_width="match_parent"
+        android:layout_marginBottom="66dp"
+        android:layout_height="match_parent"/>
+
+    <Button
+        android:layout_margin="8dp"
+        android:layout_gravity="bottom|center"
+        android:id="@+id/btnViewPager"
+        android:text="@string/view_pager_adapter"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+</FrameLayout>
