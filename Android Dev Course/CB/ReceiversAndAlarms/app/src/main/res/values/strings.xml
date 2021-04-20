@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">ReceiversAndAlarms</string>
+    <string name="power_state_receiver">Power State Receiver</string>
+</resources>
