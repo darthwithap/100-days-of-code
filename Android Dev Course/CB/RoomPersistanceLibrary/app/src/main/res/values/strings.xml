@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">RoomPersistanceLibrary</string>
+    <string name="read">Read</string>
+    <string name="write">Write</string>
+    <string name="shared_pref_act">Shared Preferences Activity</string>
+    <string name="name">Name</string>
+    <string name="red">RED</string>
+    <string name="blue">BLUE</string>
+    <string name="green">GREEN</string>
+    <string name="sqlite_activity">SQLite Activity</string>
+    <string name="add">ADD</string>
+</resources>
