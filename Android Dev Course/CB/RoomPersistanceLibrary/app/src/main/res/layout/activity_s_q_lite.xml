@@ -31,6 +31,14 @@
         android:id="@+id/lvTodos"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_marginBottom="56dp"
         android:layout_marginTop="56dp" />
+
+    <Button
+        android:id="@+id/btnTodoApp"
+        android:layout_gravity="bottom"
+        android:layout_width="match_parent"
+        android:text="Room Todo App"
+        android:layout_height="wrap_content"/>
 
 </FrameLayout>

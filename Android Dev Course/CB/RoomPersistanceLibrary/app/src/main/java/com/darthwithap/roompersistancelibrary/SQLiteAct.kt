@@ -1,5 +1,6 @@
 package com.darthwithap.roompersistancelibrary
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -38,6 +39,10 @@ class SQLiteAct : AppCompatActivity() {
             refreshTodoList()
             todos.add(newTodo)
             todoAdapter.notifyDataSetChanged()
+        }
+
+        btnTodoApp.setOnClickListener {
+            startActivity(Intent(this, RomDB::class.java))
         }
 
         refreshTodoList()
