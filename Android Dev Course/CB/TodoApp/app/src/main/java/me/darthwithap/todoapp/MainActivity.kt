@@ -194,8 +194,8 @@ class MainActivity : AppCompatActivity() {
                 todos.addAll(
                     it.filter {
                         it.title.contains(q, true)
-                        it.category.contains(q, true)
-                        it.descrption.contains(q, true)
+                                || it.category.contains(q, true)
+                                || it.descrption.contains(q, true)
 
                     }
                 )
