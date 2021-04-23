@@ -19,10 +19,10 @@ data class TodoModel(
 
 @Dao
 interface TodoDao {
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertTodo(todoModel: TodoModel): Long
 
-    @Query("SELECT * FROM TodoModel WHERE isDone != -1")
+    @Query("SELECT * FROM TodoModel WHERE isDone == 0")
     fun getTask(): LiveData<List<TodoModel>>
 
     @Query("UPDATE TodoModel SET isDone = 1 WHERE id = :tid")
