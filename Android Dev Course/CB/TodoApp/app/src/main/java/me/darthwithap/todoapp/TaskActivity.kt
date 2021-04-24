@@ -4,32 +4,41 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.app.DatePickerDialog
 import android.app.TimePickerDialog
+import android.content.Context
+import android.content.SharedPreferences
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import android.view.View
 import android.widget.ArrayAdapter
 import android.widget.Toast
 import com.google.android.material.snackbar.Snackbar
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
 import kotlinx.android.synthetic.main.activity_task.*
 import kotlinx.coroutines.*
 import java.text.SimpleDateFormat
 import java.util.*
+import kotlin.collections.ArrayList
 
-const val DB_NAME = "todo.db"
+const val DB_NAME = "todoApp.db"
+private const val TAG = "TaskActivity"
 
 class TaskActivity : AppCompatActivity(), View.OnClickListener {
 
     lateinit var mCalender: Calendar
-    lateinit var progressBar: me.darthwithap.todoapp.ProgressDialog
+    lateinit var progressBar: ProgressDialog
     private lateinit var mDateSetListener: DatePickerDialog.OnDateSetListener
     private lateinit var mTimeSetListener: TimePickerDialog.OnTimeSetListener
+    lateinit var sharedPreferences: SharedPreferences
+    private val gson = Gson()
 
     var finalDate = 0L
     var finalTime = 0L
 
     companion object {
-        val labels =
-            arrayListOf("Personal", "Business", "Shopping", "College", "Work", "Others")
+        var categories =
+            arrayListOf("Personal", "Business", "Shopping", "College", "Work", "Finance", "Others")
     }
 
     private val db by lazy {
@@ -49,6 +58,10 @@ class TaskActivity : AppCompatActivity(), View.OnClickListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_task)
+        sharedPreferences = getSharedPreferences("sharedPref", MODE_PRIVATE)
+
+        saveCategories()
+        loadCategories()
 
         etTime.addTextChangedListener(textWatcher)
         etDate.addTextChangedListener(textWatcher)
@@ -64,6 +77,23 @@ class TaskActivity : AppCompatActivity(), View.OnClickListener {
         setupSpinner()
 
         progressBar = ProgressDialog(this)
+    }
+
+    private fun saveCategories() {
+        val editor = sharedPreferences.edit()
+        val json = gson.toJson(categories)
+        Log.d(TAG, "saveCategories: $json")
+
+        editor.putString("categories", json)
+        editor.apply()
+    }
+
+    private fun loadCategories() {
+        val json = sharedPreferences.getString("categories", null)
+        val type = object : TypeToken<ArrayList<String>>() {}.type
+        Log.d(TAG, "loadCategories: $json")
+
+        categories = gson.fromJson(json, type)
     }
 
     private fun checkValidation(): Boolean {
@@ -102,7 +132,7 @@ class TaskActivity : AppCompatActivity(), View.OnClickListener {
 
         GlobalScope.launch(Dispatchers.Main) {
             delay(250)
-            val id = withContext(Dispatchers.IO) {
+            withContext(Dispatchers.IO) {
                 return@withContext db.todoDao().insertTodo(
                     TodoModel(
                         title,
@@ -119,35 +149,40 @@ class TaskActivity : AppCompatActivity(), View.OnClickListener {
 
     private fun setupSpinner() {
         val spinnerAdapter =
-            ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, labels)
-        labels.sort()
+            ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, categories)
+        categories.sort()
         spinnerCategory.adapter = spinnerAdapter
     }
 
     private fun setTimeListener(v: View) {
         mCalender = Calendar.getInstance()
+        val sdf = SimpleDateFormat(resources.getString(R.string.date_format))
         mTimeSetListener = TimePickerDialog.OnTimeSetListener { view, hourOfDay, minute ->
             val currTime = Calendar.getInstance()
             mCalender.apply {
                 set(Calendar.HOUR_OF_DAY, hourOfDay)
                 set(Calendar.MINUTE, minute)
             }
-            if (mCalender.timeInMillis > currTime.timeInMillis + 1000) updateTime()
-            else {
-                val snackbar =
-                    Snackbar.make(v, "Can't set a date in the past!", Snackbar.LENGTH_LONG)
-                snackbar.apply {
-                    setBackgroundTint(resources.getColor(R.color.yosemite))
-                    setTextColor(resources.getColor(R.color.hot_pink))
-                    show()
-                }
-            }
+            if (sdf.format(Date(System.currentTimeMillis() - 1000)) == sdf.format(Date(finalDate))) {
+                if (mCalender.timeInMillis > currTime.timeInMillis + 1000) updateTime()
+                else dateTimeErrorSnackbar(v)
+            } else updateTime()
         }
         val mTimePickerDialog = TimePickerDialog(
             this, mTimeSetListener,
             mCalender.get(Calendar.HOUR_OF_DAY), mCalender.get(Calendar.MINUTE + 1), false
         )
         mTimePickerDialog.show()
+    }
+
+    private fun dateTimeErrorSnackbar(v: View) {
+        val snackbar =
+            Snackbar.make(v, "Can't set a date in the past!", Snackbar.LENGTH_LONG)
+        snackbar.apply {
+            setBackgroundTint(resources.getColor(R.color.yosemite))
+            setTextColor(resources.getColor(R.color.hot_pink))
+            show()
+        }
     }
 
     private fun updateTime() {
@@ -173,8 +208,10 @@ class TaskActivity : AppCompatActivity(), View.OnClickListener {
         )
         val mDatePicker = mDatePickerDialog.datePicker
         mCalender.add(Calendar.MONTH, +1)
+        if (finalTime > 0 && finalTime > System.currentTimeMillis()) mDatePicker.minDate =
+            System.currentTimeMillis() - 1000
+        else mDatePicker.minDate = System.currentTimeMillis() - 1000 + 24 * 60 * 60 * 1000
         mDatePicker.maxDate = mCalender.timeInMillis
-        mDatePicker.minDate = System.currentTimeMillis() - 1000
         mDatePickerDialog.show()
     }
 

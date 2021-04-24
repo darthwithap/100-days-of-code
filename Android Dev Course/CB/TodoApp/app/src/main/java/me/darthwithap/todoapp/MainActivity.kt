@@ -1,13 +1,17 @@
 package me.darthwithap.todoapp
 
 import android.content.Intent
-import android.graphics.*
+import android.graphics.Bitmap
+import android.graphics.Canvas
+import android.graphics.Color
+import android.graphics.Paint
 import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.Drawable
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
+import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
@@ -15,9 +19,8 @@ import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.*
+
 
 class MainActivity : AppCompatActivity() {
 
@@ -134,15 +137,28 @@ class MainActivity : AppCompatActivity() {
             override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
                 val position = viewHolder.bindingAdapterPosition
 
-                if (direction == ItemTouchHelper.LEFT) {
+                if (direction == ItemTouchHelper.RIGHT) {
 
                     GlobalScope.launch(Dispatchers.IO) {
-                        db.todoDao().deleteTodo(todoAdapter.getItemId(position))
+                        val todo = todos[position]
+                        withContext(CoroutineScope(Dispatchers.IO).coroutineContext) {
+                            db.historyTodoDao().insertHistoryTodo(
+                                HistoryTodoModel(
+                                    todo.title,
+                                    todo.descrption,
+                                    todo.category,
+                                    todo.date,
+                                    todo.time,
+                                    todo.id
+                                )
+                            )
+                        }
+                        db.todoDao().finishTodo(todoAdapter.getItemId(position))
+
                     }
                 } else {
-
                     GlobalScope.launch(Dispatchers.IO) {
-                        db.todoDao().finishTodo(todoAdapter.getItemId(position))
+                        db.todoDao().deleteTodo(todoAdapter.getItemId(position))
                     }
                 }
             }
@@ -210,17 +226,19 @@ class MainActivity : AppCompatActivity() {
         }
         return super.onOptionsItemSelected(item)
     }
+
+    private fun Drawable.toBitmap(): Bitmap {
+        if (this is BitmapDrawable) return this.bitmap
+        val bitmap = Bitmap.createBitmap(
+            this.intrinsicWidth, this.intrinsicHeight,
+            Bitmap.Config.ARGB_8888
+        )
+        val canvas = Canvas(bitmap)
+        this.setBounds(0, 0, canvas.width, canvas.height)
+        this.draw(canvas)
+
+        return bitmap
+    }
 }
 
-private fun Drawable.toBitmap(): Bitmap {
-    if (this is BitmapDrawable) return this.bitmap
-    val bitmap = Bitmap.createBitmap(
-        this.intrinsicWidth, this.intrinsicHeight,
-        Bitmap.Config.ARGB_8888
-    )
-    val canvas = Canvas(bitmap)
-    this.setBounds(0, 0, canvas.width, canvas.height)
-    this.draw(canvas)
 
-    return bitmap
-}

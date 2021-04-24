@@ -17,6 +17,17 @@ data class TodoModel(
     var id: Long = 0
 )
 
+@Entity
+data class HistoryTodoModel(
+    var title: String,
+    var description: String,
+    var category: String,
+    var date: Long,
+    var time: Long,
+    @PrimaryKey
+    var id: Long
+)
+
 @Dao
 interface TodoDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
@@ -32,9 +43,22 @@ interface TodoDao {
     fun deleteTodo(tid: Long)
 }
 
-@Database(entities = [TodoModel::class], version = 1)
+@Dao
+interface HistoryTodoDao {
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    suspend fun insertHistoryTodo(historyTodoModel: HistoryTodoModel): Long
+
+    @Query("SELECT * FROM HistoryTodoModel")
+    fun getHistoryTask() : LiveData<List<HistoryTodoModel>>
+
+    @Query("DELETE FROM HistoryTodoModel WHERE id= :htid")
+    fun deleteHistoryTodo(htid: Long)
+}
+
+@Database(entities = [TodoModel::class, HistoryTodoModel::class], version = 1)
 abstract class TodoDatabase : RoomDatabase() {
     abstract fun todoDao(): TodoDao
+    abstract fun historyTodoDao(): HistoryTodoDao
 
     companion object {
 

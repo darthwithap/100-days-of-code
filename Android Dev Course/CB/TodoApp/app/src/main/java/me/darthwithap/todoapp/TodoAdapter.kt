@@ -24,25 +24,25 @@ class TodoAdapter(private val todos: List<TodoModel>) :
         holder.bind(todos[position])
     }
 
+    override fun getItemId(position: Int) = todos[position].id
+
     inner class TodoViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         fun bind(todoModel: TodoModel) {
             with(itemView) {
                 val colors = resources.getIntArray(R.array.category_colors)
-                val color = colors[TaskActivity.labels.indexOf(todoModel.category)]
+                val color = colors[TaskActivity.categories.indexOf(todoModel.category)]
                 vColorTag.setBackgroundColor(color)
                 tvTitle.text = todoModel.title
                 tvDescription.text = todoModel.descrption
                 tvCategory.text = todoModel.category
                 tvDate.text = SimpleDateFormat(resources.getString(R.string.date_format)).format(
-                    (Date(todoModel.date))
+                    Date(todoModel.date)
                 )
                 tvTime.text = SimpleDateFormat(resources.getString(R.string.time_format)).format(
-                    (Date(todoModel.time))
+                    Date(todoModel.time)
                 )
             }
         }
 
     }
-
-    override fun getItemId(position: Int) = todos[position].id
 }
