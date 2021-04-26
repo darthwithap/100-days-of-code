@@ -18,6 +18,15 @@ data class TodoModel(
 )
 
 @Entity
+data class Student(
+    val name: String,
+    val age: Int,
+    val gender: Int = 0,
+    @PrimaryKey(autoGenerate = true)
+    val rollNo: Int
+)
+
+@Entity
 data class HistoryTodoModel(
     var title: String,
     var description: String,
