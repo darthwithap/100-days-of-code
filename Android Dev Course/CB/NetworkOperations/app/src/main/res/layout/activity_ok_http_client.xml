@@ -5,7 +5,15 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".MainActivity">
+    tools:context=".OkHttpClientActivity">
+    <TextView
+        android:id="@+id/tvOkHttpHeading"
+        android:text="Using OkHttp"
+        android:textAppearance="@style/TextAppearance.AppCompat.Headline"
+        android:textAlignment="center"
+        android:padding="12dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
 
     <EditText
         android:id="@+id/etQuery"
@@ -53,11 +61,11 @@
         android:layout_weight="2.5" />
 
     <Button
-        android:id="@+id/btnUsingOkHttp"
+        android:id="@+id/btnMemeShareApp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_margin="16dp"
-        android:text="Using OkHttp" />
+        android:text="Meme Share App using Volley" />
 
 </LinearLayout>

@@ -3,4 +3,7 @@
     <string name="github_users">Show users on GitHub</string>
     <string name="enter_github_user_query_here">Enter github user \'query\' here</string>
     <string name="by_default_the_query_is_parth">By default the query is \'parth\'</string>
+    <string name="meme_share_using_volley">Meme Share Using Volley</string>
+    <string name="share">Share</string>
+    <string name="next">Next</string>
 </resources>

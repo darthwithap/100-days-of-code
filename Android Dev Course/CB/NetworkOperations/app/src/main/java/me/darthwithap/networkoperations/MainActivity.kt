@@ -1,10 +1,12 @@
 package me.darthwithap.networkoperations
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.activity_main.*
+import okhttp3.*
 import org.json.JSONObject
 import java.io.IOException
 import java.net.HttpURLConnection
@@ -23,8 +25,11 @@ class MainActivity : AppCompatActivity() {
 
         btnGithubUsers.setOnClickListener {
             if (etQuery.text.toString().isNotEmpty()) query = etQuery.text.toString()
-            Log.d(TAG, "onCreate: $query")
             NetworkTask().execute("https://api.github.com/search/users?q=$query")
+        }
+
+        btnUsingOkHttp.setOnClickListener {
+            startActivity(Intent(this, OkHttpClientActivity::class.java))
         }
 
     }
