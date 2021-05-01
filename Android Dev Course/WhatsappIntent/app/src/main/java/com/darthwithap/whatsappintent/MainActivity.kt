@@ -14,13 +14,16 @@ class MainActivity : AppCompatActivity() {
         var number = "9999999999"
 
         if (intent.action == Intent.ACTION_PROCESS_TEXT) {
-            number = intent.getCharSequenceExtra(Intent.EXTRA_PROCESS_TEXT).toString()
+            number = intent.getCharSequenceExtra(Intent.EXTRA_PROCESS_TEXT).toString().filter {
+                !it.isWhitespace()
+            }
         }
 
         if (number.isDigitsOnly()) {
             startWhatsApp(number)
         } else {
             Toast.makeText(this, "Please check the number", Toast.LENGTH_SHORT).show()
+            finish()
         }
     }
 
