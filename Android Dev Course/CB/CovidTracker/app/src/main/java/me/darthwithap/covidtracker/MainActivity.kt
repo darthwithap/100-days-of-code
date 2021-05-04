@@ -19,7 +19,7 @@ import java.util.concurrent.TimeUnit
 private const val TAG = "MainActivity"
 
 class MainActivity : AppCompatActivity() {
-    lateinit var stateListAdapater : StateAdapter
+    lateinit var stateListAdapater: StateAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -43,7 +43,7 @@ class MainActivity : AppCompatActivity() {
                 val data = Gson().fromJson(response.body?.string(), Response::class.java)
                 withContext(Dispatchers.Main) {
                     bindCombinedData(data?.statewise?.get(0))
-                    data.statewise?.subList(0, data.statewise.size)?.let {bindStateWiseData(it) }
+                    data.statewise?.subList(0, data.statewise.size)?.let { bindStateWiseData(it) }
                 }
             }
 
