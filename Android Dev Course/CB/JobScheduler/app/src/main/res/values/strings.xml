@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">JobScheduler</string>
+    <string name="demo_job">Demo Job</string>
+</resources>
