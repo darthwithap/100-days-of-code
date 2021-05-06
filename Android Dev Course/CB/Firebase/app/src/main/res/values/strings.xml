@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Firebase</string>
+    <string name="enter_name_to_add_to_firebase">Enter name to add to firebase</string>
+    <string name="publish_to_firebase">Publish to Firebase</string>
+</resources>

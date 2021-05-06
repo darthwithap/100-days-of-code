@@ -56,7 +56,6 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-
     override fun onResume() {
         super.onResume()
         sensorsManager.registerListener(proximitySensorEventListener, proximitySensor, 1000 * 1000)
@@ -70,5 +69,4 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun accelerationToColor(acceleration: Float) = ((acceleration + 12) / 24 * 255).roundToInt()
-
 }
