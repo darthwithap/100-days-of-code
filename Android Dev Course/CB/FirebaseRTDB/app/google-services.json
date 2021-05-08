@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "353819092255",
+    "project_id": "rtdb-247ed",
+    "storage_bucket": "rtdb-247ed.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:353819092255:android:0d0ba6c463bd79c24cbc2a",
+        "android_client_info": {
+          "package_name": "me.darthwithap.firebasertdb"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "353819092255-q0g26kcs2fn3n25q94o91vtrpfmbt41a.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDZocFJsk4Kvxnuw22Gxdka_AU3Fv_ocCU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "353819092255-q0g26kcs2fn3n25q94o91vtrpfmbt41a.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
