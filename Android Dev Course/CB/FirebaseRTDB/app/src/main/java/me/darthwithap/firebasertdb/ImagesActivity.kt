@@ -6,6 +6,7 @@ import android.renderscript.Sampler
 import android.util.Log
 import android.view.View
 import android.widget.Toast
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.firebase.database.*
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
@@ -25,24 +26,25 @@ class ImagesActivity : AppCompatActivity(), ImageAdapter.OnItemClickListener {
 
         imageAdapter = ImageAdapter(uploads)
         imageAdapter.setOnItemClickListener(this)
-        rvImages.adapter = imageAdapter
         storage = FirebaseStorage.getInstance()
         databaseReference = FirebaseDatabase.getInstance().getReference("uploads")
+        rvImages.layoutManager = LinearLayoutManager(this)
+        rvImages.setHasFixedSize(true)
+        rvImages.adapter = imageAdapter
 
         dbListener = databaseReference.addValueEventListener(object : ValueEventListener {
             override fun onCancelled(error: DatabaseError) {
-                Toast.makeText(this@ImagesActivity, "${error.message}", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this@ImagesActivity, error.message, Toast.LENGTH_SHORT).show()
                 pbLoading.visibility = View.INVISIBLE
             }
 
             override fun onDataChange(snapshot: DataSnapshot) {
                 uploads.clear()
                 snapshot.children.forEach {
-                    val upload = it.getValue(Upload::class.java)
+                    val upload = it.getValue<Upload>(Upload::class.java)
                     upload?.key = it.key
                     uploads.add(upload!!)
                 }
-
                 imageAdapter.notifyDataSetChanged()
                 pbLoading.visibility = View.INVISIBLE
             }
@@ -50,14 +52,21 @@ class ImagesActivity : AppCompatActivity(), ImageAdapter.OnItemClickListener {
     }
 
     override fun onItemClick(pos: Int) {
-        TODO("Not yet implemented")
+        Toast.makeText(this, "Normal click", Toast.LENGTH_SHORT).show()
     }
 
     override fun onDeleteClick(pos: Int) {
-        TODO("Not yet implemented")
+        val upload = uploads[pos]
+
+        val reference = storage.getReferenceFromUrl(upload.url)
+        reference.delete().addOnSuccessListener {
+            databaseReference.child(upload.key!!).removeValue().addOnSuccessListener {
+                Toast.makeText(this, "Item Deleted", Toast.LENGTH_SHORT).show()
+            }
+        }
     }
 
     override fun onOtherClick(pos: Int) {
-        TODO("Not yet implemented")
+        Toast.makeText(this, "Other click", Toast.LENGTH_SHORT).show()
     }
 }

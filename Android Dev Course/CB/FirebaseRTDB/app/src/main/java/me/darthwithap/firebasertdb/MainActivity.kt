@@ -63,15 +63,16 @@ class MainActivity : AppCompatActivity() {
                     Handler(Looper.getMainLooper()).postDelayed({
                         pbHorizontal.progress = 0
                         Toast.makeText(this, "Upload successful", Toast.LENGTH_SHORT).show()
-                        var downloadUrl = ""
                         imageReference.downloadUrl.addOnSuccessListener {
-                            downloadUrl = it.toString()
+                            val upload = Upload(
+                                etImageName.text.toString().trim(),
+                                it.toString()
+                            )
+                            databaseReference.child(databaseReference.push().key!!).setValue(upload)
                         }
-                        val upload = Upload(
-                            etImageName.text.toString().trim(),
-                            downloadUrl
-                        )
-                        databaseReference.child(databaseReference.push().key!!).setValue(upload)
+                        imageUri = null
+                        ivImage.setImageResource(0)
+                        etImageName.clearFocus()
                         btnUpload.isEnabled = true
                     }, 200)
                 }

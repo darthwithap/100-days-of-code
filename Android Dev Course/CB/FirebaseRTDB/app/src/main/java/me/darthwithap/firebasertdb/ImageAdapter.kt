@@ -3,7 +3,6 @@ package me.darthwithap.firebasertdb
 import android.view.*
 import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
-import kotlinx.android.synthetic.main.activity_main.view.*
 import kotlinx.android.synthetic.main.item_image.view.*
 
 class ImageAdapter(private val uploads: List<Upload>) :
@@ -40,7 +39,7 @@ class ImageAdapter(private val uploads: List<Upload>) :
                     .placeholder(R.drawable.ic_placeholder)
                     .fit()
                     .centerCrop()
-                    .into(ivImage)
+                    .into(ivImageItem)
             }
         }
 
