@@ -21,12 +21,7 @@ class MainActivity : AppCompatActivity() {
 
         if (intent.action == Intent.ACTION_PROCESS_TEXT) {
             number = intent.getCharSequenceExtra(Intent.EXTRA_PROCESS_TEXT).toString()
-            Log.d(TAG, "onCreate: $number")
-
-            number = number.filter { !it.isWhitespace() }
-
-            Log.d(TAG, "onCreate: no whitespace$number")
-
+                .filter { !it.isWhitespace() }
         }
 
         if (isNumberWithoutPlus(number) || isNumberWithPlus(number)) {
@@ -38,11 +33,12 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun isNumberWithPlus(number: CharSequence): Boolean {
-        val num = number.substring(1, number.lastIndex)
+        val num = number.substring(1, number.length)
         return (num.isDigitsOnly() && (num.length in 10..12 step 2))
     }
 
     private fun isNumberWithoutPlus(number: CharSequence): Boolean {
+        for (i in 10..12 step 2) Log.d(TAG, "isNumberWithPlus for i: $i")
         return (number.isDigitsOnly() && number.length in 10..12 step 2)
     }
 
