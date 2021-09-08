@@ -5,12 +5,9 @@ import android.net.Uri
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.core.text.isDigitsOnly
-
-private const val TAG = "MainActivity"
 
 class MainActivity : AppCompatActivity() {
     @RequiresApi(Build.VERSION_CODES.M)
@@ -22,6 +19,7 @@ class MainActivity : AppCompatActivity() {
         if (intent.action == Intent.ACTION_PROCESS_TEXT) {
             number = intent.getCharSequenceExtra(Intent.EXTRA_PROCESS_TEXT).toString()
                 .filter { !it.isWhitespace() }
+            setResult(RESULT_OK)
         }
 
         if (isNumberWithoutPlus(number) || isNumberWithPlus(number)) {
@@ -38,7 +36,6 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun isNumberWithoutPlus(number: CharSequence): Boolean {
-        for (i in 10..12 step 2) Log.d(TAG, "isNumberWithPlus for i: $i")
         return (number.isDigitsOnly() && number.length in 10..12 step 2)
     }
 
@@ -59,10 +56,7 @@ class MainActivity : AppCompatActivity() {
 
         intent.data = Uri.parse("https://wa.me/$data")
 
-        if (packageManager.resolveActivity(intent, 0) != null) {
-            startActivity(intent)
-        } else Toast.makeText(this, "Please install WhatsApp on your device.", Toast.LENGTH_SHORT)
-            .show()
+        startActivity(intent)
         finish()
     }
 }

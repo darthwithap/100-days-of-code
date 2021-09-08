@@ -4,9 +4,9 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/ic_whatsapp_icon"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@mipmap/ic_whatsapp_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.WhatsAppIntent">
         <activity android:name=".MainActivity">
@@ -16,9 +16,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
             <intent-filter>
-                 <action android:name="android.intent.action.PROCESS_TEXT"/>
-                 <category android:name="android.intent.category.DEFAULT"/>
-                 <data android:mimeType="text/plain"/>
+                <action android:name="android.intent.action.PROCESS_TEXT" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data android:mimeType="text/plain" />
             </intent-filter>
         </activity>
     </application>
