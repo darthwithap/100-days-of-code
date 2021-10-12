@@ -10,11 +10,12 @@ import androidx.annotation.RequiresApi
 import androidx.core.text.isDigitsOnly
 
 class MainActivity : AppCompatActivity() {
+    private lateinit var number: String
+
     @RequiresApi(Build.VERSION_CODES.M)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        var number = "9999999999"
 
         if (intent.action == Intent.ACTION_PROCESS_TEXT) {
             number = intent.getCharSequenceExtra(Intent.EXTRA_PROCESS_TEXT).toString()
@@ -31,14 +32,21 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun isNumberWithPlus(number: CharSequence): Boolean {
-        val num = number.substring(1, number.length)
-        return (num.isDigitsOnly() && (num.length in 10..12 step 2))
+        return if (number[0] == '+') {
+            val num = number.substring(1, number.length)
+            (num.isDigitsOnly() && (num.length in 10..12 step 2))
+        } else if (number[0] == '0' && number[1] == '0') {
+            val num = number.substring(2, number.length)
+            (num.isDigitsOnly() && (num.length in 10..12 step 2))
+        } else if (number[0] == '0') {
+            val num = number.substring(1, number.length)
+            (num.isDigitsOnly() && (num.length in 10..12 step 2))
+        } else false
     }
 
     private fun isNumberWithoutPlus(number: CharSequence): Boolean {
         return (number.isDigitsOnly() && number.length in 10..12 step 2)
     }
-
 
     private fun startWhatsApp(number: String) {
         val intent = Intent(Intent.ACTION_VIEW)
@@ -47,6 +55,14 @@ class MainActivity : AppCompatActivity() {
         val data = when {
             number[0] == '+' -> {
                 number.substring(1)
+            }
+            number[0] == '0' && number[1] == '0' -> {
+                if (number.length == 14) number.substring(2)
+                else "91${number.substring(2)}"
+            }
+            number[0] == '0' -> {
+                if (number.length == 13) number.substring(1)
+                else "91${number.substring(1)}"
             }
             number.length == 10 -> {
                 "91$number"
